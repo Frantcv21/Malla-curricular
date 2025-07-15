@@ -12,38 +12,56 @@ h1 {
     color: #d63384;
 }
 
+#malla {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+}
+
 .ciclo {
-    margin-bottom: 20px;
     border: 1px solid #ccc;
     padding: 10px;
     background: #ffe6f0;
     border-radius: 8px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.ciclo.completed {
+    background-color: #b19cd9;
+    color: white;
 }
 
 .ciclo h2 {
     text-align: center;
-    font-size: 24px;
-    color: #d63384;
+    font-size: 20px;
+    color: inherit;
 }
 
 .curso {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 8px;
-    display: block;
+    margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
     background-color: white;
     transition: 0.3s;
+    text-align: center;
+    width: 100%;
 }
 
 .curso.completed {
     background-color: #8e44ad;
-    color: #4b0082;
+    color: white;
 }
 
 .curso.unlocked {
     background-color: #fff8b0;
+    color: #333;
 }
 
 .curso.locked {
