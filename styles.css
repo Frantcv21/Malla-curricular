@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.ciclo {
+    margin-bottom: 20px;
+}
+
+.curso {
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.curso.completed {
+    background-color: #90ee90;
+}
+
+.curso.locked {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+}
