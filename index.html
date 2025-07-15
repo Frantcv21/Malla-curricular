@@ -22,7 +22,8 @@
 
         #malla {
             display: flex;
-            flex-wrap: nowrap;
+            flex-direction: row;
+            gap: 10px;
             overflow-x: auto;
         }
 
@@ -31,8 +32,11 @@
             padding: 10px;
             background: #ffe6f0;
             border-radius: 8px;
-            margin-right: 10px;
-            min-width: 150px;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .ciclo.completed {
@@ -43,7 +47,7 @@
         .ciclo h2 {
             text-align: center;
             font-size: 20px;
-            color: #d63384;
+            color: inherit;
         }
 
         .curso {
@@ -54,15 +58,18 @@
             cursor: pointer;
             background-color: white;
             transition: 0.3s;
+            text-align: center;
+            width: 100%;
         }
 
         .curso.completed {
             background-color: #8e44ad;
-            color: #ffffff;
+            color: white;
         }
 
         .curso.unlocked {
             background-color: #fff8b0;
+            color: #333;
         }
 
         .curso.locked {
@@ -83,7 +90,7 @@
             { nombre: "Matemática I", ciclo: 1, prerequisitos: [], completado: false },
             { nombre: "Química Orgánica", ciclo: 2, prerequisitos: ["Química General"], completado: false },
             { nombre: "Matemática II", ciclo: 2, prerequisitos: ["Matemática I"], completado: false },
-            // Agrega el resto de cursos por ciclos con sus prerequisitos
+            // Continúa con el resto de cursos...
         ];
 
         function renderMalla() {
@@ -93,11 +100,15 @@
             for (let ciclo = 1; ciclo <= 10; ciclo++) {
                 const cicloDiv = document.createElement('div');
                 cicloDiv.classList.add('ciclo');
-                cicloDiv.innerHTML = `<h2>Ciclo ${ciclo}</h2>`;
 
-                let cicloCompletado = true;
+                const header = document.createElement('h2');
+                header.textContent = `Ciclo ${ciclo}`;
+                cicloDiv.appendChild(header);
 
-                cursos.filter(c => c.ciclo === ciclo).forEach(curso => {
+                const cursosCiclo = cursos.filter(c => c.ciclo === ciclo);
+                let cicloCompletado = cursosCiclo.length > 0;
+
+                cursosCiclo.forEach(curso => {
                     const div = document.createElement('div');
                     div.textContent = curso.nombre;
                     div.classList.add('curso');
@@ -116,7 +127,7 @@
                     cicloDiv.appendChild(div);
                 });
 
-                if (cicloCompletado && cicloDiv.children.length > 1) {
+                if (cicloCompletado) {
                     cicloDiv.classList.add('completed');
                 }
 
