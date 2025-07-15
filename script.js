@@ -81,9 +81,15 @@ function renderMalla() {
     for (let ciclo = 1; ciclo <= 10; ciclo++) {
         const cicloDiv = document.createElement('div');
         cicloDiv.classList.add('ciclo');
-        cicloDiv.innerHTML = `<h2>Ciclo ${ciclo}</h2>`;
 
-        cursos.filter(c => c.ciclo === ciclo).forEach(curso => {
+        const header = document.createElement('h2');
+        header.textContent = `Ciclo ${ciclo}`;
+        cicloDiv.appendChild(header);
+
+        const cursosCiclo = cursos.filter(c => c.ciclo === ciclo);
+        let cicloCompletado = cursosCiclo.length > 0;
+
+        cursosCiclo.forEach(curso => {
             const div = document.createElement('div');
             div.textContent = curso.nombre;
             div.classList.add('curso');
@@ -92,13 +98,19 @@ function renderMalla() {
                 div.classList.add('completed');
             } else if (prerequisitosCompletos(curso)) {
                 div.classList.add('unlocked');
+                cicloCompletado = false;
             } else {
                 div.classList.add('locked');
+                cicloCompletado = false;
             }
 
             div.addEventListener('click', () => marcarCurso(curso));
             cicloDiv.appendChild(div);
         });
+
+        if (cicloCompletado && cursosCiclo.length > 0) {
+            cicloDiv.classList.add('completed');
+        }
 
         container.appendChild(cicloDiv);
     }
